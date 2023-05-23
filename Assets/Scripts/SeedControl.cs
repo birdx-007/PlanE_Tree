@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SeedControl : MonoBehaviour
 {
-    private float rotateSpeed = 6f;
+    private float rotateSpeed = 2f;
     private Rigidbody2D rigidbody2d;
     private void Awake()
     {

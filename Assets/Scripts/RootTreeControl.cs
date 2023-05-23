@@ -14,14 +14,24 @@ public class RootTreeControl : MonoBehaviour
     private Vector2 force;
     private float dragDistance;
     public static int seedLeftNumber;
+    private float seedRecoverTime = 30f;
+    private float leftTimeUntilNewSeed;
     void Awake()
     {
         seedParent = new GameObject("SeedParent");
+        leftTimeUntilNewSeed = seedRecoverTime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        leftTimeUntilNewSeed -= Time.deltaTime;
+        if(leftTimeUntilNewSeed <= 0)
+        {
+            // recover a seed
+            seedLeftNumber++;
+            leftTimeUntilNewSeed = seedRecoverTime;
+        }
         if (ManagerControl.isPlaying && seedLeftNumber > 0)
         {
             if (Input.GetMouseButtonDown(0) && isMouseOnTree)

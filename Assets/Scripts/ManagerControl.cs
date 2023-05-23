@@ -26,6 +26,7 @@ public class ManagerControl : MonoBehaviour
     public BackgroundControl backgroundControl;
     public PauseButtonControl pauseButtonControl;
     public static bool isPlaying;
+    public Animator titleAnimator;
     void Start()
     {
         planetParent = new GameObject("PlanetParent");
@@ -36,7 +37,7 @@ public class ManagerControl : MonoBehaviour
         RestartGame();
         PauseOrResumeGame();
     }
-    void FixedUpdate()
+    void Update()
     {
         leftTimeUntilNewPlanet -= Time.deltaTime;
         if (leftTimeUntilNewPlanet <= 0)
@@ -60,6 +61,7 @@ public class ManagerControl : MonoBehaviour
         }
         pauseButtonControl.isPausing = !isPlaying;
         pauseButtonControl.UpdateButtonImage();
+        titleAnimator.SetBool("isShowing", !isPlaying);
     }
     public void RestartGame()
     {
@@ -158,8 +160,8 @@ public class ManagerControl : MonoBehaviour
     }
     public void UpdateDifficulty()
     {
-        curPlanetRotateSpeed = 0.1f + 0.06f * (GroundControl.saplingNumber / 2);
-        curPlanetGravityScale = 0.05f + 0.02f * (GroundControl.saplingNumber / 2);
+        curPlanetRotateSpeed = 0.1f + 0.02f * (GroundControl.saplingNumber / 4f);
+        curPlanetGravityScale = Mathf.Clamp(0.05f + 0.01f * (GroundControl.saplingNumber / 4f), 0.05f, 0.1f);
         spacingTimeBetweenPlanets = 10f / (curPlanetGravityScale / 0.05f);
     }
 }

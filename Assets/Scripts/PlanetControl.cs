@@ -13,11 +13,6 @@ public class PlanetControl : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void FixedUpdate()
     {
         rigidbody2d.rotation += (rigidbody2d.position.x > 0) ? (rotateSpeed) : (-rotateSpeed);

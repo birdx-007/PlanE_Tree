@@ -30,14 +30,14 @@ public class BackgroundControl : MonoBehaviour
     {
         cleanliness = Mathf.Clamp01(cleanliness);
         gradientCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.25f + cleanliness * 0.75f, 1));
-        //遍历像素点
+        //鐢熸垚鏉愯川
         for (int y = 0; y < imageSize.y; y++)
         {
             Color pixelColor = GetColorByCurve(1.0f * y / imageSize.y);
             texture2D.SetPixel(1, y, pixelColor);
         }
         texture2D.Apply();
-        //创建Sprite
+        //鏇存柊Sprite
         Sprite sprite = Sprite.Create(texture2D, new Rect(0, 0, 1, imageSize.y), new Vector2(0.5f, 0.5f));
         background.sprite = sprite;
         
